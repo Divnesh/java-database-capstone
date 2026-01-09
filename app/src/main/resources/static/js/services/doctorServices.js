@@ -1,5 +1,5 @@
 // ================= IMPORTS =================
-import { API_BASE_URL } from "./config.js";
+import { API_BASE_URL } from "../config/config.js";
 
 // ================= API ENDPOINT =================
 const DOCTOR_API = `${API_BASE_URL }/doctor`;
@@ -7,9 +7,9 @@ const DOCTOR_API = `${API_BASE_URL }/doctor`;
 // ================= GET ALL DOCTORS =================
 export const getDoctors = async () => {
   try {
-    const response = await fetch(`${DOCTOR_API}/all`);
+    const response = await fetch(DOCTOR_API);
     const data = await response.json();
-    return data.doctors || [];
+    return data.doctors;
   } catch (error) {
     console.error("Error fetching doctors:", error);
     return [];
@@ -20,7 +20,7 @@ export const getDoctors = async () => {
 export const deleteDoctor = async (doctorId, token) => {
   try {
     const response = await fetch(
-      `${DOCTOR_API}/delete/${doctorId}/${token}`,
+      `${DOCTOR_API}/${doctorId}/${token}`,
       {
         method: "DELETE"
       }
@@ -28,10 +28,8 @@ export const deleteDoctor = async (doctorId, token) => {
 
     const data = await response.json();
 
-    return {
-      success: response.ok,
-      message: data.message || "Doctor deleted successfully"
-    };
+    const result = await response.json();
+    return { success: response.ok, message: result.message };
   } catch (error) {
     console.error("Error deleting doctor:", error);
     return {
@@ -45,7 +43,7 @@ export const deleteDoctor = async (doctorId, token) => {
 export const saveDoctor = async (doctor, token) => {
   try {
     const response = await fetch(
-      `${DOCTOR_API}/save/${token}`,
+      `${DOCTOR_API}/${token}`,
       {
         method: "POST",
         headers: {
@@ -55,12 +53,8 @@ export const saveDoctor = async (doctor, token) => {
       }
     );
 
-    const data = await response.json();
-
-    return {
-      success: response.ok,
-      message: data.message || "Doctor saved successfully"
-    };
+    const result = await response.json();
+    return {success : response.ok , message : result.message}
   } catch (error) {
     console.error("Error saving doctor:", error);
     return {
@@ -71,14 +65,14 @@ export const saveDoctor = async (doctor, token) => {
 };
 
 // ================= FILTER DOCTORS =================
-export const filterDoctors = async (name, time, specialty) => {
+export const filterDoctors = async (name, time, speciality) => {
   try {
     const response = await fetch(
-      `${DOCTOR_API}/filter/${name}/${time}/${specialty}`
+      `${DOCTOR_API}/filter/${name}/${time}/${speciality}`
     );
 
     if (!response.ok) {
-      console.error("Failed to filter doctors");
+      console.error("Failed to filter doctors:", response.statusText);
       return { doctors: [] };
     }
 

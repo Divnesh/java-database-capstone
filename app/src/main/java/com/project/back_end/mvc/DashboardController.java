@@ -8,6 +8,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.back_end.services.Service;
 
+import java.util.Map;
+
 @Controller
 public class DashboardController {
 
@@ -19,9 +21,9 @@ public class DashboardController {
     @GetMapping("/adminDashboard/{token}")
     public ModelAndView adminDashboard(@PathVariable("token") String token) {
         // Validate token for admin role
-        String validationError = service.validateToken(token, "admin");
+        Map<String, String> map=service.validateToken(token,"admin").getBody();
 
-        if (validationError == null || validationError.isEmpty()) {
+         if(map.isEmpty()) {
             // Token valid → forward to admin dashboard view
             return new ModelAndView("admin/adminDashboard");
         } else {
@@ -34,9 +36,9 @@ public class DashboardController {
     @GetMapping("/doctorDashboard/{token}")
     public ModelAndView doctorDashboard(@PathVariable("token") String token) {
         // Validate token for doctor role
-        String validationError = service.validateToken(token, "doctor");
+        Map<String, String> map=service.validateToken(token,"doctor").getBody();
 
-        if (validationError == null || validationError.isEmpty()) {
+        if(map.isEmpty()) {
             // Token valid → forward to doctor dashboard view
             return new ModelAndView("doctor/doctorDashboard");
         } else {

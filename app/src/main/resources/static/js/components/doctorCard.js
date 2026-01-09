@@ -3,13 +3,13 @@
    ================================ */
 
 // Overlay UI for booking appointments
-import { openBookingOverlay } from "./loggedPatient.js";
+import { showBookingOverlay } from "../loggedPatient.js";
 
 // Admin API – delete doctor
-import { deleteDoctor } from "./doctorServices.js";
+import { deleteDoctor } from "../services/doctorServices.js";
 
 // Patient API – fetch patient details
-import { getPatientDetails } from "./patientServices.js";
+import { getPatientData } from "../services/patientServices.js";
 
 /* ================================
    Create Doctor Card
@@ -120,9 +120,9 @@ export function createDoctorCard(doctor) {
       }
 
       try {
-        const patient = await getPatientDetails(token);
+        const patient = await getPatientData(token);
 
-        openBookingOverlay({
+        showBookingOverlay({
           doctor,
           patient
         });

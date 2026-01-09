@@ -21,47 +21,47 @@
                 <div id="header"></div>
                 <main class="main-content">
                     <h1>Admin Dashboard</h1>
-                    <!-- Search Bar -->
-                    <input type="text" id="searchBar" placeholder="Search Doctors by Name..." class="search-doctor" />
-
-                    <!-- Filter Dropdowns -->
-                    <div class="filters">
-                        <select id="timeFilter">
-                            <option value="">Filter by Time</option>
+                    <input type="text" id="searchBar" class="searchBar" placeholder="search by doctor name" />
+                    <div class="filter-wrapper">
+                        <select class="filter-select" id="filterTime">
+                            <option value="">Sort by time</option>
                             <option value="AM">AM</option>
                             <option value="PM">PM</option>
                         </select>
-
-                        <select id="specialtyFilter">
-                            <option value="">Filter by Specialty</option>
+                        <select class="filter-select" id="filterSpecialty">
+                            <option value="">Specialty</option>
                             <option value="Cardiologist">Cardiologist</option>
-                            <option value="Dentist">Dentist</option>
                             <option value="Dermatologist">Dermatologist</option>
                             <option value="Neurologist">Neurologist</option>
-                            <option value="General">General</option>
+                            <option value="Pediatrician">Pediatrician</option>
+                            <option value="Orthopedic">Orthopedic</option>
+                            <option value="Gynecologist">Gynecologist</option>
+                            <option value="Psychiatrist">Psychiatrist</option>
+                            <option value="Dentist">Dentist</option>
+                            <option value="Ophthalmologist">Ophthalmologist</option>
+                            <option value="Ent">ENT Specialist</option>
+                            <option value="Urologist">Urologist</option>
+                            <option value="Oncologist">Oncologist</option>
+                            <option value="Gastroenterologist">Gastroenterologist</option>
+                            <option value="General">General Physician</option>
                         </select>
-
-                        <!-- Add Doctor Button -->
-                        <button id="addDoctorBtn" class="dashboard-btn">Add Doctor</button>
                     </div>
-
-                    <!-- Doctor Card Container -->
-                    <div id="content" class="doctor-list"></div>
+                    <div id="content"></div>
                 </main>
                 <div id="footer"></div>
             </div>
         </div>
 
         <!-- Modal Popup for Add Doctor -->
-        <div id="modal" class="modal hidden">
+        <div id="modal" class="modal">
             <div class="modal-content">
-                <button class="close" id="closeModal">&times;</button>
+                <span class="close" id="closeModal">&times;</span>
                 <div id="modal-body">
                 </div>
             </div>
         </div>
 
-        <script type="module" src="../js/services/adminDashboard.js" defer></script>
+        <script type="module" src="../js/adminDashboard.js" defer></script>
         <script type="module" src="../js/components/doctorCard.js" defer></script>
     </body>
 </html>

@@ -65,7 +65,8 @@ function renderHeader() {
     headerContent += `
       <button id="addDocBtn"
               class="adminBtn"
-              onclick="openModal('addDoctor')">
+              onclick="openModal('addDoctor')"
+      >
         Add Doctor
       </button>
       <a href="#" onclick="logout()">Logout</a>

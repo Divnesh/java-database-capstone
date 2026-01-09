@@ -1,5 +1,6 @@
+<!-- doctorDashboard.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <title>Doctor Dashboard</title>
@@ -17,7 +18,6 @@
         <script defer th:src="@{/js/components/footer.js}"></script>
         <script defer type="module" th:src="@{/js/doctorDashboard.js}"></script>
     </head>
-
     <body onload="renderContent()">
         <div class="container">
             <div class="wrapper">
@@ -25,29 +25,25 @@
                 <div class="main-content">
                     <h1>Doctor Dashboard</h1>
                     <input type="text" id="searchBar" class="searchBar" placeholder="Search Bar for custom output" />
-
-                    <div class="filters">
-                        <button id="todayButton" class="dashboard-btn">Today’s Appointments</button>
-                        <input type="date" id="datePicker" class="date-filter" />
+                    <div class="filter-wrapper">
+                        <button class="today-btn" id="todayButton">Today's Appointments</button>
+                        <input type="date" id="datePicker" class="date-picker" />
                     </div>
-
-                    <table class="patient-table">
-                        <thead>
+                    <table id="patientTable">
+                        <thead class="table-header">
                             <tr>
-                                <th>Patient ID</th>
-                                <th>Name</th>
-                                <th>Phone No.</th>
-                                <th>Email</th>
-                                <th>Prescription</th>
+                            <th>Patient ID</th>
+                            <th>Name</th>
+                            <th>Phone No.</th>
+                            <th>Email</th>
+                            <th>Prescription</th>
                             </tr>
                         </thead>
-                        <tbody id="patientTableBody">
-                        </tbody>
-                    </table>
-                </div>
+                        <tbody id="appointmentsTableBody"></tbody>
+                        </table>
+                    </div>
                 <div id="footer"></div>
-            </div>
+                </div>
         </div>
     </body>
-
 </html>
