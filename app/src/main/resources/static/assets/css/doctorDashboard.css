@@ -1,65 +1,541 @@
-/* This is the style sheet for the doctorDashboard.html */
-/* 
-**Table Header (`.table-header`)**
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-* Set font size to `24px` for clear emphasis.
-* Use a dark teal color (`#015c5d`) for consistency with the theme.
-* Add `30px` bottom margin and remove right margin.
+/* === Base Layout === */
+html, body {
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
 
-**Table Styling (`table`)**
+img {
+  max-width: 100%;
+  display: block;
+}
 
-* Make the table full width (`100%`).
-* Collapse borders for clean lines.
-* Use a `sans-serif` font.
-* Add `20px` top margin for spacing.
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
 
-**Table Head (`thead`)**
+/* =====================
+   Layout Wrapper
+   ===================== */
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-* Set a very light dark background (`#33333310`) for header row.
-* Use white text color (`#fff`).
+.wrapper main {
+  flex: 1 0 auto; /* grow to fill available space */
+}
 
-**Table Cells (`td, th`)**
+/* =====================
+   Typography
+   ===================== */
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1d4ed8; /* blue-700 */
+  margin-bottom: 1rem;
+}
 
-* Apply padding of `12px 16px` for spacing.
-* Center-align the text.
-* Add a subtle bottom border (`1px solid #ddd`).
+/* =====================
+   Buttons
+   ===================== */
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
 
-**Table Row Styling**
+.btn,
+.dashboard-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #2563eb; /* blue-600 */
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.1s ease;
+}
 
-* Alternate row colors for better readability:
+.btn:hover,
+.dashboard-btn:hover {
+  background-color: #1d4ed8; /* blue-700 */
+}
 
-  * Even rows: semi-transparent light grey (`#f9f9f959`).
-  * Odd rows: soft white background (`#ffffffc0`).
-* On hover: highlight row with a light teal overlay (`#015c5d39`).
+.btn:active,
+.dashboard-btn:active {
+  transform: translateY(1px);
+}
 
-**Prescription Button (`.prescription-btn`)**
+.btn:focus-visible,
+.dashboard-btn:focus-visible {
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.4);
+}
 
-* Set size to `30px x 30px`.
-* Make it interactive with a pointer cursor.
-* Add transition effects for scale and brightness on hover.
-* On hover:
+.btn-center {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
 
-  * Slightly enlarge (`scale(1.1)`)
-  * Brighten appearance
-* On click: slightly shrink (`scale(0.95)`).
+/* =====================
+   Main Content Area
+   ===================== */
+.main-content {
+  flex: 1 0 auto;
+  background-image: url('../images/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* fixed background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
 
-**No Record Message (`.noPatientRecord`)**
+.main-content .content {
+  background-color: rgba(255, 255, 255, 0.92);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  max-width: 960px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
 
-* Use a `16px` italic grey font to indicate no data gently.
+/* =====================
+   Forms & Inputs
+   ===================== */
+.input-field,
+.select-dropdown,
+.search-bar {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d1d5db; /* gray-300 */
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
 
-**Today Button (`.today-btn`)**
+.input-field:focus,
+.select-dropdown:focus,
+.search-bar:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+  outline: none;
+}
 
-* Add right margin (`10px`).
-* Add padding (`10px`).
-* Set background color to teal green (`#015c5d`).
+.filter-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
 
-**Date Picker (`.date-picker`)**
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
 
-* Add left margin (`10px`) and top margin (`13px`).
-* Round corners with `8px` radius.
-* Add padding (`10px`) and set fixed height (`30px`).
+/* =====================
+   Admin / Action Buttons
+   ===================== */
+.button,
+.adminBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #16a34a; /* green-600 */
+  color: #ffffff;
+  padding: 0.65rem 1.25rem;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.1s ease;
+}
 
----
+.button:hover,
+.adminBtn:hover {
+  background-color: #15803d; /* green-700 */
+}
 
-Let me know if you'd like a consolidated style guide for the entire HospitalCRM frontend.
- */
+.button:active,
+.adminBtn:active {
+  transform: translateY(1px);
+}
+
+.button:focus-visible,
+.adminBtn:focus-visible {
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.35);
+}
+
+.input-field:focus,
+.select-dropdown:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+  outline: none;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* =====================
+   Modal
+   ===================== */
+.modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 1000;
+}
+
+.modal.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  width: 90%;
+  max-width: 520px;
+  padding: 1.75rem;
+  position: relative;
+  transform: translateY(-10px);
+  transition: transform 0.25s ease;
+}
+
+.modal.show .modal-content {
+  transform: translateY(0);
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  font-size: 1.25rem;
+  color: #6b7280; /* gray-500 */
+  background: none;
+}
+
+.close:hover {
+  color: #111827; /* gray-900 */
+}
+.modal-content {
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  width: 90%;
+  max-width: 500px;
+  padding: 1.5rem;
+  position: relative;
+  animation: modalFadeIn 0.2s ease;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  font-size: 1.25rem;
+  color: #6b7280; /* gray-500 */
+  background: none;
+}
+
+.close:hover {
+  color: #111827; /* gray-900 */
+}
+
+/* =====================
+   Header
+   ===================== */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e7eb; /* gray-200 */
+}
+
+.header .logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.25rem;
+}
+
+.header nav a {
+  text-decoration: none;
+  font-weight: 500;
+  color: #374151; /* gray-700 */
+  transition: color 0.2s ease;
+}
+
+.header nav a:hover {
+  color: #2563eb;
+}
+
+/* =====================
+   Footer
+   ===================== */
+.footer {
+  background-color: #111827; /* gray-900 */
+  color: #d1d5db; /* gray-300 */
+  padding: 1.5rem;
+}
+
+.footer .footer-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.footer section {
+  flex: 1 1 200px;
+}
+
+.footer h4 {
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+}
+
+.footer a {
+  color: #9ca3af; /* gray-400 */
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.footer a:hover {
+  color: #ffffff;
+}
+
+/* =====================
+   Responsive
+   ===================== */
+@media (max-width: 768px) {
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  .header nav ul {
+    gap: 0.75rem;
+  }
+
+  .footer .footer-content {
+    flex-direction: column;
+  }
+}
+
+/* =====================
+   Doctor Cards & Content Area
+   ===================== */
+.doctor-list {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+  align-items: stretch;
+}
+
+.doctor-card {
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  flex: 1 1 280px;
+  max-width: 320px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.doctor-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.doctor-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.doctor-card p {
+  font-size: 0.9rem;
+  color: #4b5563; /* gray-600 */
+}
+
+.doctor-card .actions {
+  margin-top: auto;
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* =====================
+   Responsive Enhancements
+   ===================== */
+@media (max-width: 640px) {
+  .filter-group {
+    flex-direction: column;
+  }
+
+  .doctor-list {
+    justify-content: center;
+  }
+
+  .doctor-card {
+    max-width: 100%;
+  }
+}
+
+  .doctor-container {
+    gap: 1rem;
+  }
+}
+
+
+/* =====================
+   Doctor Dashboard – Table Styles
+   ===================== */
+
+/* Table Header */
+.table-header {
+  font-size: 24px;
+  color: #015c5d;
+  margin-bottom: 30px;
+  margin-right: 0;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: sans-serif;
+  margin-top: 20px;
+}
+
+/* Table Head */
+thead {
+  background-color: #33333310;
+  color: #fff;
+}
+
+/* Table Cells */
+td,
+th {
+  padding: 12px 16px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Table Row Styling */
+tbody tr:nth-child(even) {
+  background-color: #f9f9f959;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #ffffffc0;
+}
+
+tbody tr:hover {
+  background-color: #015c5d39;
+}
+
+/* Prescription Button */
+.prescription-btn {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.prescription-btn:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
+.prescription-btn:active {
+  transform: scale(0.95);
+}
+
+/* No Patient Record Message */
+.noPatientRecord {
+  font-size: 16px;
+  font-style: italic;
+  color: #6b7280; /* gray-500 */
+}
+
+/* Today Button */
+.today-btn {
+  margin-right: 10px;
+  padding: 10px;
+  background-color: #015c5d;
+  color: #ffffff;
+  border-radius: 6px;
+}
+
+.today-btn:hover {
+  filter: brightness(1.1);
+}
+
+/* Date Picker */
+.date-picker {
+  margin-left: 10px;
+  margin-top: 13px;
+  border-radius: 8px;
+  padding: 10px;
+  height: 30px;
+  border: 1px solid #d1d5db;
+}
+
+.date-picker:focus {
+  outline: none;
+  border-color: #015c5d;
+  box-shadow: 0 0 0 3px rgba(1, 92, 93, 0.25);
+}
+
